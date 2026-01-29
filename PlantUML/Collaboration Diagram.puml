@@ -1,0 +1,21 @@
+@startuml
+title Collaboration Diagram (Communication Diagram)
+
+skinparam linetype ortho
+
+object ":CheckoutPage" as UI
+object ":CheckoutController" as C
+object ":OrderService" as S
+object ":PaymentGateway" as P
+object ":InventoryService" as I
+
+UI -> C : 1: submitOrder(cart, customerInfo)
+C  -> S : 1.1: placeOrder(cart, customerInfo)
+S  -> I : 1.1.1: reserve(items)
+S  -> P : 1.1.2: authorize(amount, paymentToken)
+P --> S : 1.1.3: authResult
+I --> S : 1.1.4: reservationId
+S --> C : 1.2: orderConfirmation(orderId)
+C --> UI : 1.3: showConfirmation(orderId)
+
+@enduml
