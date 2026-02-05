@@ -1,0 +1,20 @@
+@startuml
+title State Diagram
+
+[*] --> Draft
+
+Draft --> Submitted : submit()
+Submitted --> Cancelled : cancel()
+
+Submitted --> Paid : paymentAuthorized()
+Paid --> Shipped : ship()
+Shipped --> Delivered : deliver()
+
+Paid --> Refunded : refund()
+Delivered --> Refunded : refund()
+
+Cancelled --> [*]
+Refunded --> [*]
+Delivered --> [*]
+
+@enduml
