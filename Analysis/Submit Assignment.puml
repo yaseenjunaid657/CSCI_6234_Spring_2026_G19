@@ -1,0 +1,19 @@
+@startuml
+allowmixing
+left to right direction
+
+actor Student
+
+rectangle "Submit Assignment" {
+  boundary "Submission UI" as B4
+  control "Submission Controller" as C4
+  entity "Assignment" as E7
+  entity "Submission DB" as E8
+
+  Student --> B4
+  B4 --> C4 : submit(work)
+  C4 --> E7 : check deadline
+  C4 --> E8 : save submission
+  B4 <-- C4 : show receipt
+}
+@enduml
