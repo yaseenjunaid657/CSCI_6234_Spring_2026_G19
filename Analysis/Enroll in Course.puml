@@ -1,0 +1,22 @@
+@startuml
+allowmixing
+left to right direction
+
+actor Student
+
+rectangle "Enroll in Course" {
+  boundary "Course UI" as B2
+  control "Enrollment Controller" as C2
+  entity "Course Catalog" as E3
+  entity "Enrollment" as E4
+
+  Student --> B2
+  B2 --> C2 : request courses
+  C2 --> E3 : fetch courses
+  B2 <-- C2 : display list
+
+  B2 --> C2 : enroll(courseId)
+  C2 --> E4 : create enrollment
+  B2 <-- C2 : confirmation
+}
+@enduml
