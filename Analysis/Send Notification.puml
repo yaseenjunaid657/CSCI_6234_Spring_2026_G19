@@ -1,0 +1,19 @@
+@startuml
+allowmixing
+left to right direction
+
+actor Instructor
+
+rectangle "Send Notification" {
+  boundary "Notification UI" as B6
+  control "Notification Controller" as C6
+  entity "Notification DB" as E11
+  entity "Email Service" as E12
+
+  Instructor --> B6
+  B6 --> C6 : send(message)
+  C6 --> E11 : store message
+  C6 --> E12 : send email
+  B6 <-- C6 : confirmation
+}
+@enduml
