@@ -1,0 +1,22 @@
+@startuml
+allowmixing
+left to right direction
+
+actor Instructor
+
+rectangle "Grade Assignment" {
+  boundary "Grading UI" as B5
+  control "Grading Controller" as C5
+  entity "Submission DB" as E9
+  entity "Gradebook" as E10
+
+  Instructor --> B5
+  B5 --> C5 : load submission
+  C5 --> E9 : fetch submission
+  B5 <-- C5 : display submission
+
+  B5 --> C5 : submit grade
+  C5 --> E10 : save grade
+  B5 <-- C5 : success
+}
+@enduml
