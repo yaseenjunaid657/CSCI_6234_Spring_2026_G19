@@ -1,0 +1,19 @@
+@startuml
+allowmixing
+left to right direction
+
+actor "User (Student/Instructor)" as User
+
+rectangle "View Course Content" {
+  boundary "Content UI" as B3
+  control "Content Controller" as C3
+  entity "Course" as E5
+  entity "Content DB" as E6
+
+  User --> B3
+  B3 --> C3 : request content
+  C3 --> E5 : validate access
+  C3 --> E6 : fetch materials
+  B3 <-- C3 : display content
+}
+@enduml
