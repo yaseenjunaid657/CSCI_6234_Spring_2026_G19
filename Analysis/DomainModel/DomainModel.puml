@@ -1,0 +1,130 @@
+@startuml
+title Domain Model - Learning Management System (LMS)
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+left to right direction
+
+' ==============================
+' Description Note (Fixed Syntax)
+' ==============================
+note as N1
+Domain Model Description:
+
+The domain model represents the core entities and relationships 
+within the Learning Management System (LMS). The abstract User 
+class defines shared attributes and is specialized into Student 
+and Instructor through inheritance. Students enroll in courses 
+via Enrollment and submit assignments through Submission. 
+Instructors teach courses, create assignments, assign grades, 
+and send notifications. Courses organize materials using 
+Modules and ContentItems. Each assignment may have multiple 
+submissions, and each submission may result in a Grade. 
+Notifications support communication between instructors and students.
+end note
+
+' ==============================
+' Core Users
+' ==============================
+abstract class User {
+  userId : UUID
+  fullName : String
+  email : String
+  status : String
+}
+
+class Student {
+  studentNumber : String
+  program : String
+}
+
+class Instructor {
+  employeeId : String
+  officeHours : String
+}
+
+User <|-- Student
+User <|-- Instructor
+
+' ==============================
+' Course Structure
+' ==============================
+class Course {
+  courseId : String
+  title : String
+  term : String
+}
+
+class Module {
+  moduleId : String
+  title : String
+  orderIndex : int
+}
+
+class ContentItem {
+  contentId : String
+  title : String
+  type : String
+  url : String
+}
+
+Course "1" *-- "0..*" Module
+Module "1" *-- "0..*" ContentItem
+
+' ==============================
+' Enrollment
+' ==============================
+class Enrollment {
+  enrollmentId : UUID
+  enrolledOn : Date
+  status : String
+}
+
+Student "1" -- "0..*" Enrollment
+Course  "1" -- "0..*" Enrollment
+
+' ==============================
+' Assignments & Submissions
+' ==============================
+class Assignment {
+  assignmentId : UUID
+  title : String
+  dueDate : DateTime
+  maxPoints : int
+}
+
+class Submission {
+  submissionId : UUID
+  submittedAt : DateTime
+  fileUrl : String
+  status : String
+}
+
+class Grade {
+  gradeId : UUID
+  score : float
+  feedback : String
+  gradedAt : DateTime
+}
+
+Course "1" *-- "0..*" Assignment
+Assignment "1" -- "0..*" Submission
+Student "1" -- "0..*" Submission
+Submission "0..1" -- "1" Grade
+Instructor "1" -- "0..*" Grade
+
+' ==============================
+' Notifications
+' ==============================
+class Notification {
+  notificationId : UUID
+  message : String
+  createdAt : DateTime
+  channel : String
+}
+
+Instructor "1" -- "0..*" Notification
+Course "1" -- "0..*" Notification
+Student "0..*" -- "0..*" Notification
+
+@enduml
