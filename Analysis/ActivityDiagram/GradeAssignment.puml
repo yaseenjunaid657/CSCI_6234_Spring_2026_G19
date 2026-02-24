@@ -1,0 +1,28 @@
+@startuml
+title Activity Diagram - Grade Assignment
+
+start
+
+note right
+Steps:
+1. Instructor opens grading area
+2. System shows submissions list
+3. Instructor selects a submission
+4. Instructor enters score and feedback
+5. System saves grade
+6. Optional: system sends notification to student
+end note
+
+:Open Grading Area;
+:Display Submissions List;
+:Select Submission;
+:Enter Score and Feedback;
+:Save Grade;
+
+if (Send notification?) then (Yes)
+  :Send Grade Notification;
+else (No)
+endif
+
+stop
+@enduml
