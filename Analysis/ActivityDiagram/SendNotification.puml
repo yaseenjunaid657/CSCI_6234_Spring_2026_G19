@@ -1,0 +1,24 @@
+@startuml
+title Activity Diagram - Send Notification 
+
+start
+
+note right
+Steps:
+1. Instructor opens notification page
+2. Instructor writes message
+3. Instructor selects course/audience
+4. System stores notification
+5. System sends message using email service
+6. System shows confirmation
+end note
+
+:Open Notification Page;
+:Write Message;
+:Select Course/Audience;
+:Store Notification;
+:Send via Email Service;
+:Show Confirmation;
+
+stop
+@enduml
