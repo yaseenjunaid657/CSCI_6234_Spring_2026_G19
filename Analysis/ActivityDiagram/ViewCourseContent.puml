@@ -1,0 +1,27 @@
+@startuml
+title Activity Diagram - View Course Content
+
+start
+
+note right
+Steps:
+1. User opens a course
+2. System validates access (enrollment/role)
+3. If access granted, system loads modules and content list
+4. User selects a content item
+5. System displays content OR access denied message
+end note
+
+:Open Course;
+:Validate Access;
+
+if (Access granted?) then (Yes)
+  :Load Modules and Content List;
+  :Select Content Item;
+  :Display Content;
+else (No)
+  :Show Access Denied;
+endif
+
+stop
+@enduml
