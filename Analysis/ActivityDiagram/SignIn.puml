@@ -1,0 +1,29 @@
+@startuml
+title Activity Diagram - Sign In
+
+start
+
+note right
+Steps:
+1. User opens login page
+2. User enters credentials
+3. System validates credentials
+4. If valid, system loads profile and creates session
+5. System shows dashboard OR error message
+end note
+
+:Open Login Page;
+:Enter Username and Password;
+:Validate Credentials;
+
+if (Credentials valid?) then (Yes)
+  :Load User Profile;
+  :Create Session;
+  :Show Dashboard;
+else (No)
+  :Show Error Message;
+  :Return to Login Page;
+endif
+
+stop
+@enduml
