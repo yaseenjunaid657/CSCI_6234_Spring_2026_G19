@@ -1,0 +1,28 @@
+@startuml
+title Activity Diagram - Submit Assignment
+
+start
+
+note right
+Steps:
+1. Student opens assignment page
+2. Student uploads work
+3. System validates deadline and file rules
+4. If valid, system stores submission
+5. System shows receipt OR submission error message
+end note
+
+:Open Assignment Page;
+:Upload Work;
+:Validate Deadline and File Rules;
+
+if (Submission valid?) then (Yes)
+  :Store Submission;
+  :Show Submission Receipt;
+else (No)
+  :Show Submission Error;
+  :Request Re-upload;
+endif
+
+stop
+@enduml
