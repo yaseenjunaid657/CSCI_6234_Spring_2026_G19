@@ -1,0 +1,29 @@
+@startuml
+title Activity Diagram - Enroll in Course 
+
+start
+
+note right
+Steps:
+1. Student opens course catalog
+2. System displays available courses
+3. Student selects a course
+4. System checks eligibility/capacity
+5. If allowed, system creates enrollment
+6. System shows confirmation OR cannot-enroll message
+end note
+
+:Open Course Catalog;
+:Display Available Courses;
+:Select Course;
+:Check Eligibility and Capacity;
+
+if (Allowed to enroll?) then (Yes)
+  :Create Enrollment;
+  :Show Enrollment Confirmation;
+else (No)
+  :Show Cannot Enroll Message;
+endif
+
+stop
+@enduml
