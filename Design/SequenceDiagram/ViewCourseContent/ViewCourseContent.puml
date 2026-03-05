@@ -1,0 +1,18 @@
+@startuml
+title Sequence Diagram - View Course Content
+
+actor User
+boundary "Course Content UI" as UI
+control "ContentController" as CC
+entity "Course" as C
+entity "ContentDB" as DB
+
+User -> UI : openCourse()
+UI -> CC : requestContent(courseID)
+CC -> C : validateAccess()
+C --> CC : accessGranted
+CC -> DB : fetchMaterials()
+DB --> CC : content
+CC --> UI : displayContent()
+
+@enduml
