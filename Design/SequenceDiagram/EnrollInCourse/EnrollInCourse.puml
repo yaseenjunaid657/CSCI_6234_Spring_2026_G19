@@ -1,0 +1,22 @@
+@startuml
+title Sequence Diagram - Enroll in Course
+
+actor Student
+boundary "Course UI" as UI
+control "EnrollmentController" as EC
+entity "CourseCatalog" as CC
+entity "Enrollment" as EN
+
+Student -> UI : viewCourses()
+UI -> EC : requestCourseList()
+EC -> CC : fetchCourses()
+CC --> EC : courses
+EC --> UI : showCourses()
+
+Student -> UI : selectCourse()
+UI -> EC : enroll(courseID)
+EC -> EN : createEnrollment()
+EN --> EC : confirmation
+EC --> UI : enrollmentSuccess()
+
+@enduml
