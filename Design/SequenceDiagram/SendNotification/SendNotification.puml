@@ -1,0 +1,18 @@
+@startuml
+title Sequence Diagram - Send Notification
+
+actor Instructor
+boundary "Notification UI" as UI
+control "NotificationController" as NC
+entity "NotificationDB" as DB
+entity "EmailService" as ES
+
+Instructor -> UI : writeMessage()
+UI -> NC : sendNotification(message)
+NC -> DB : storeNotification()
+DB --> NC : stored
+NC -> ES : sendEmail()
+ES --> NC : delivered
+NC --> UI : confirmation()
+
+@enduml
