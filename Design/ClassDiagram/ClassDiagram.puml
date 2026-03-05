@@ -1,0 +1,80 @@
+@startuml
+title Class Diagram - LMS Design
+
+class User {
+userId : String
+name : String
+email : String
+login()
+logout()
+}
+
+class Student {
+studentNumber : String
+submitAssignment()
+enrollCourse()
+}
+
+class Instructor {
+employeeId : String
+gradeAssignment()
+sendNotification()
+}
+
+User <|-- Student
+User <|-- Instructor
+
+class Course {
+courseId : String
+title : String
+term : String
+addModule()
+}
+
+class Module {
+moduleId : String
+title : String
+orderIndex : int
+}
+
+class Assignment {
+assignmentId : String
+title : String
+dueDate : Date
+maxPoints : int
+}
+
+class Submission {
+submissionId : String
+fileUrl : String
+submittedAt : Date
+}
+
+class Grade {
+gradeId : String
+score : float
+feedback : String
+}
+
+class Notification {
+notificationId : String
+message : String
+createdAt : Date
+}
+
+class Enrollment {
+enrollmentId : String
+status : String
+}
+
+Course "1" -- "0..*" Module
+Course "1" -- "0..*" Assignment
+Assignment "1" -- "0..*" Submission
+Submission "1" -- "0..1" Grade
+Student "1" -- "0..*" Submission
+Student "1" -- "0..*" Enrollment
+Course "1" -- "0..*" Enrollment
+Instructor "1" -- "0..*" Course
+Course "1" -- "0..*" Notification
+
+@enduml
