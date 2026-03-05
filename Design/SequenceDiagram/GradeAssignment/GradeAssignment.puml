@@ -1,0 +1,21 @@
+@startuml
+title Sequence Diagram - Grade Assignment
+
+actor Instructor
+boundary "Grading UI" as UI
+control "GradingController" as GC
+entity "SubmissionDB" as DB
+entity "Gradebook" as GB
+
+Instructor -> UI : openSubmission()
+UI -> GC : requestSubmission()
+GC -> DB : fetchSubmission()
+DB --> GC : submissionData
+
+Instructor -> UI : enterGrade()
+UI -> GC : submitGrade()
+GC -> GB : saveGrade()
+GB --> GC : success
+GC --> UI : displayConfirmation()
+
+@enduml
