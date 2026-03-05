@@ -1,0 +1,18 @@
+@startuml
+title Sequence Diagram - Submit Assignment
+
+actor Student
+boundary "Submission UI" as UI
+control "SubmissionController" as SC
+entity "Assignment" as A
+entity "SubmissionDB" as DB
+
+Student -> UI : uploadAssignment()
+UI -> SC : submit(file)
+SC -> A : checkDeadline()
+A --> SC : valid
+SC -> DB : saveSubmission()
+DB --> SC : confirmation
+SC --> UI : showReceipt()
+
+@enduml
