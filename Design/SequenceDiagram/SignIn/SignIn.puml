@@ -1,0 +1,19 @@
+@startuml
+title Sequence Diagram - Sign In
+
+actor User
+boundary "Login UI" as UI
+control "AuthController" as AC
+entity "AuthService" as AS
+entity "UserAccount" as UA
+
+User -> UI : enterCredentials()
+UI -> AC : login(credentials)
+AC -> AS : verifyCredentials(credentials)
+AS -> UA : findUser()
+UA --> AS : userData
+AS --> AC : authenticationResult
+AC --> UI : loginResult
+UI --> User : displaySuccessOrError()
+
+@enduml
